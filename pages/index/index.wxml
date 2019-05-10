@@ -1,0 +1,42 @@
+<!--index.wxml-->
+<view>
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+    <button id="look-weather" size="mini" type="default" bind:tap="lookWeatherTap">查看天气</button>
+  </view>
+  <view class="usermotto" style="text-align:center">
+    <text class="user-motto" bindtap='bindViewTap'>{{motto}}</text>
+  </view>
+  <view class="joke-title" hover-class="red-color" hover-stay-time="1000">笑话一：</view>
+  <view class="joke">
+  当年我失恋了，很伤心却没人诉说，傻傻地躲在在阳台上对着我的玩具熊一边哭一边诉苦。说了一大通，我喃喃地问玩具熊：“小熊，如果你是我，你会怎么做呢？”话音刚落，一阵大风突然刮来，玩具熊直直地从阳台上一头栽了下去……
+  </view>
+  <scroll-view class='border-mm' style="margin-top:10px;height:200px;" scroll-y="true" upper-threshold="20" enable-back-to-top="true">
+   <view class="joke-title">笑话二：</view>
+  <view class="joke">
+  为防止本人双十一乱花钱，我决定在群友中选一位替我保存钱，大家可以把支付宝发给我，我会在明晚公布是哪位朋友这么不要脸。
+  </view>
+   <view class="joke-title">笑话三：</view>
+  <view class="joke">
+  老丈人是参加过反击战的老兵，脾气异常火爆，一家人都怕他，唯独对我儿子（蛋壳）情有独钟，骑他脖子上撒尿都不生气。这两天眼皮总跳，一查黄历，我去，又快到收花生的季节了。果不其然，老丈人拎着两箱牛奶来视察了，一坐下就对我嘘寒问暖，大热天我的后背直冒凉气，这是在询问我的身体状况啊！好吃好喝招待，临走时，老丈人是一步三回头。是福不是祸是祸躲不过，得，我硬着头皮上去问：“爸，有啥要帮忙的您尽管开口！”老丈人搓了搓手掌，眯着眼说：“难得小蛋壳放假，借我回去玩两天行不？”
+  </view>
+  <view class="joke-title">笑话四：</view>
+  <view class="joke">
+  前女友结婚，新郎官想让我出丑，非要让我上台说两句，我推迟，他坚持，没办法，我就只能硬着头皮说道：这么多年我一事无成，不能怪小露离开我，但今天发生了一件让我很自豪的事，我竟然平白无故的睡了别人的老婆三年！刚讲完就被轰出去了。。。
+  </view>
+  <view class="joke-title">笑话五：</view>
+  <view class="joke">
+  一男孩头枕白色包躺在步行街上，旁边放着吃剩的面包，喝剩半瓶的矿泉水...围观的人都数落他，一点也不思进取...只有我激动的走过去，说道：“口红，钥匙，口香糖一盒，身份证，放满卡的卡夹，一千三百块钱现金...”男孩淡定的起身，拿起白色的包，说道：“大姐，我等了你一天一宿了...”
+  </view>
+  </scroll-view>
+</view>
+<functional-page-navigator
+  name="loginAndGetUserInfo"
+  bind:success="loginSuccess"
+>
+  <button>登录到插件</button>
+</functional-page-navigator>
