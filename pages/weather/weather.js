@@ -1,11 +1,27 @@
 // pages/weather/weather.js
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    cityId:""//当前选择的城市ID
+    areaInfo:{
+      cityId: "",//当前选择的城市ID,
+      areaName: "定位中",
+      cityName: "定位中..."
+    },
+    weather:{
+      city:"",
+      wendu:25,
+      fengxiang:"--风",
+      fengli:"--级",
+      shidu:"--%",
+      updateTime:"--:--",
+      sunrise:"--:--",
+      sunset:"--:--",
+      cityYesterday:null,
+      forecast: [],
+      zhiShus:[]
+    }
   },
 
   /**
@@ -13,7 +29,11 @@ Page({
    */
   onLoad: function (options) {
     try {
-      this.data.cityId = wx.getStorageSync('userCityId');
+      var areaInfoStr = wx.getStorageSync('areaInfo');
+      if(areaInfoStr){
+        var saveAreaInfo = JSON.parse(areaInfoStr);
+        this.setData({ areaInfo: saveAreaInfo});
+      }
     } catch (e) { }
   },
 
@@ -22,13 +42,13 @@ Page({
    */
   onReady: function () {
     var myThis=this;
-    if(this.data.cityId){
-      this.loadWeather(this.data.cityId);
+    if (this.data.areaInfo && this.data.areaInfo.cityId ){
+      this.loadWeather(this.data.areaInfo.cityId);
       return;
     }
     wx.chooseLocation({
       success: function (data) {
-        console.log('地理信息：name=' + data.name + ',address=' + data.address + ',latitude=' + data.latitude + 'longitude=' + data.longitude);
+        myThis.data.areaInfo.cityName=data.name;
         myThis.loadCityId(data.address, myThis.loadWeather);
       },
       fail: function (exInfo) {
@@ -141,6 +161,15 @@ Page({
     if (areaIndex > 0) {
       areaName = address.substring(cityIndex+1, areaIndex);
     }
+    if(!province||!city){
+      wx.showToast({
+        title: "请选择带省、市信息的位置信息",
+        icon:"none"
+      });
+      myThis.areaName="请定位";
+      return;
+    }
+    this.data.areaInfo.areaName = areaName ? areaName+"区" : city+"市";
     var areaCode ="101";
     var provinceFunc=function(areaCodeAry){
        for(var i in areaCodeAry){
@@ -185,19 +214,34 @@ Page({
     this.loadAreaCode(provinceFunc,"",1);
   },
   loadWeather:function(cityId){
+    var myThis=this;
+    this.data.areaInfo.cityId = cityId;
+    this.setData({ areaInfo: this.data.areaInfo});
+    var saveAreaInfo = JSON.stringify(this.data.areaInfo);
     wx.setStorage({
-      key: 'userCityId',
-      data: cityId,
+      key: 'areaInfo',
+      data: saveAreaInfo,
     });//异步保存当前cityId
     wx.request({
       url: 'https://min.yshdevelop.club/api/weather/GetCityWeather?cityId='+cityId,
       method:'GET',
       dataType:'json',
       success:function(response){
+        if(response.data&&response.data.code===1){
+          myThis.setData({weather:response.data.resultData});//设置显示天气信息
+        }else{
+          wx.showToast({
+            title: "加载天气信息失败",
+            icon:"none"
+          });
+        }
         console.log(response);
       },
       fail:function(exInfo){
-        console.log(exInfo);
+        wx.showToast({
+          title: "加载天气信息出错："+exInfo.errMsg,
+          icon: "none"
+        });
       }
     })
   }

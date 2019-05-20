@@ -1,2 +1,73 @@
 <!--pages/weather/weather.wxml-->
-<text>pages/weather/weather.wxml</text>
+<view class="w-header">
+  <navigator target="self" open-type="navigate" url="../wcity/wcity" >
+    <image class="city-img" src="/image/city.png" mode="scaleToFill"></image>
+  </navigator>
+  <view class="area-info">
+  <text>{{areaInfo.areaName}}</text>
+  <image class="area-img" src="/image/user_area.png" mode="scaleToFill"></image>
+  </view>
+</view>
+<view class="w-boday">
+  <text class="w-cityname">{{areaInfo.cityName}}</text>
+  <view class="temperature">
+    <text class="temp-num">{{weather.wendu}}</text>
+    <text class="temp-unit">℃</text>
+  </view>
+  <view class="w-state" style="font-weight:bolder">{{weather.fengxiang}}  {{weather.fengli}}</view>
+  <view class="w-state" wx:if="{{weather.forecast&&weather.forecast.length>0}}">
+    <text>{{weather.forecast[0].low}}</text> / <text>{{weather.forecast[0].high}}</text>
+  </view>
+  <view class="w-state">湿度：{{weather.shidu}}</view>
+  <view class="w-state">日出：{{weather.sunrise}}  日落：{{weather.sunset}}</view>
+  <view class="pubilsh-time"><text>{{weather.updateTime}}</text>发布</view>
+  <view class="w-list">
+    <view class="w-day">
+      <view class="w-common" wx:if="{{weather.cityYesterday}}">
+        <text space="emsp">{{weather.cityYesterday.date}}</text>
+        <view class="w-status"><text>{{weather.cityYesterday.low}}</text> / <text>{{weather.cityYesterday.high}}</text></view>
+      </view>
+      <view class="w-cond">
+        <text class="w-title">白天：</text>
+        <view class="w-condition">
+          <image src="/image/cloudy.png" mode="widthFix"></image>
+          <text>{{weather.cityYesterday.dayCondition.skyType}}</text>
+        </view>
+        <text class="w-fengli">{{weather.cityYesterday.dayCondition.fengxiang}}  {{weather.cityYesterday.dayCondition.fengli}}</text>
+      </view>
+      <view class="w-cond">
+        <text class="w-title">晚上：</text>
+        <view class="w-condition"><image src="/image/cloudy.png" mode="widthFix"></image>
+        <text>{{weather.cityYesterday.nightCondition.skyType}}</text></view>
+        <text class="w-fengli">{{weather.cityYesterday.nightCondition.fengxiang}}  {{weather.cityYesterday.nightCondition.fengli}}</text>
+      </view>
+    </view>
+    <view class="w-day" wx:for="{{weather.forecast}}" wx:key="{{date}}">
+      <view class="w-common">
+        <text space="emsp">{{item.date}}</text>
+        <view class="w-status"><text>{{item.low}}</text> / <text>{{item.high}}</text></view>
+      </view>
+      <view class="w-cond">
+        <text class="w-title">白天：</text>
+        <view class="w-condition">
+          <image src="/image/cloudy.png" mode="widthFix"></image>
+          <text>{{item.dayCondition.skyType}}</text>
+        </view>
+        <text class="w-fengli">{{item.dayCondition.fengxiang}}  {{item.dayCondition.fengli}}</text>
+      </view>
+      <view class="w-cond">
+        <text class="w-title">晚上：</text>
+        <view class="w-condition"><image src="/image/cloudy.png" mode="widthFix"></image>
+        <text>{{item.nightCondition.skyType}}</text></view>
+        <text class="w-fengli">{{item.nightCondition.fengxiang}}  {{item.nightCondition.fengli}}</text>
+      </view>
+    </view>
+    <view class="w-day" wx:for="{{weather.zhiShus}}" wx:key="{{name}}">
+      <view class="w-cond">
+        <text wx:if="{{item.name}}" class="w-title">{{item.name}}：{{item.value}}</text>
+        <text>{{item.detail}}</text>
+      </view>
+    </view>
+  </view>
+  <text space="emsp"> 数据由中国天气提供</text>
+</view>

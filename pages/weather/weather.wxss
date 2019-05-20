@@ -1,1 +1,90 @@
 /* pages/weather/weather.wxss */
+.w-header{
+  line-height: 100rpx;
+  position: relative;
+  background-color: #071635;
+  font-size: 35rpx;
+  color: #ffffff;
+}
+.city-img{
+  height:60rpx;
+  width:60rpx;
+}
+.area-img{
+  height: 90rpx;
+  width:70rpx;
+  vertical-align:middle;
+}
+.w-header navigator{
+  position: absolute;
+  left: 20rpx;
+  top:20rpx;
+}
+.w-header .area-info{
+  margin:0 auto;
+  width:175rpx;
+}
+.w-cityname{
+  font-size: 27rpx;
+  padding-left: 20rpx;
+}
+.temperature{
+  margin: 0 auto;
+  padding-top:75rpx;
+  width:250rpx;
+}
+.temp-num{
+  font-size:200rpx;
+}
+.temp-unit{
+  font-size:100rpx;
+  height: 400rpx;
+}
+.w-state{
+  text-align: center;
+}
+.pubilsh-time{
+  margin-top: 100rpx;
+  padding-left:30rpx;
+  margin-bottom: 10rpx;
+}
+.w-list{
+  padding:0 30rpx;
+  border-bottom:1rpx solid #eeffff;
+}
+.w-day{
+ border-top:1rpx solid #eeffff;
+ padding:20rpx 0;
+}
+.w-day image{
+  width: 100rpx;
+  vertical-align:middle;
+  margin-left: 50rpx;
+  margin-right: 10rpx;
+}
+.w-common .w-status{
+  float: right;
+}
+.w-cond{
+  overflow: hidden;
+  margin-top:10rpx;
+}
+.w-cond text{
+display: block;
+}
+.w-condition{
+  float: left;
+  width:400rpx;
+}
+.w-condition text{
+display: inline-block;
+}
+.w-fengli{
+  float:right;
+}
+.w-boday{
+  color:#ffffff;
+  padding-bottom: 50rpx;
+  background-color: #274166;
+  font-size: 30rpx;
+}
