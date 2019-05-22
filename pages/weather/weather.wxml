@@ -4,8 +4,8 @@
     <image class="city-img" src="/image/city.png" mode="scaleToFill"></image>
   </navigator>
   <view class="area-info">
-  <text>{{areaInfo.areaName}}</text>
-  <image class="area-img" src="/image/user_area.png" mode="scaleToFill"></image>
+    <text bindtap="selectLocation">{{areaInfo.areaName}}</text>
+    <image class="area-img" src="/image/user_area.png" mode="scaleToFill" bindtap="selectLocation"></image>
   </view>
 </view>
 <view class="w-boday">
@@ -30,14 +30,14 @@
       <view class="w-cond">
         <text class="w-title">白天：</text>
         <view class="w-condition">
-          <image src="/image/cloudy.png" mode="widthFix"></image>
+          <image src="{{weather.cityYesterday.dayCondition.wImg}}" mode="widthFix"></image>
           <text>{{weather.cityYesterday.dayCondition.skyType}}</text>
         </view>
         <text class="w-fengli">{{weather.cityYesterday.dayCondition.fengxiang}}  {{weather.cityYesterday.dayCondition.fengli}}</text>
       </view>
       <view class="w-cond">
         <text class="w-title">晚上：</text>
-        <view class="w-condition"><image src="/image/cloudy.png" mode="widthFix"></image>
+        <view class="w-condition"><image src="{{weather.cityYesterday.nightCondition.wImg}}" mode="widthFix"></image>
         <text>{{weather.cityYesterday.nightCondition.skyType}}</text></view>
         <text class="w-fengli">{{weather.cityYesterday.nightCondition.fengxiang}}  {{weather.cityYesterday.nightCondition.fengli}}</text>
       </view>
@@ -50,14 +50,14 @@
       <view class="w-cond">
         <text class="w-title">白天：</text>
         <view class="w-condition">
-          <image src="/image/cloudy.png" mode="widthFix"></image>
+          <image src="{{item.dayCondition.wImg}}" mode="widthFix"></image>
           <text>{{item.dayCondition.skyType}}</text>
         </view>
         <text class="w-fengli">{{item.dayCondition.fengxiang}}  {{item.dayCondition.fengli}}</text>
       </view>
       <view class="w-cond">
         <text class="w-title">晚上：</text>
-        <view class="w-condition"><image src="/image/cloudy.png" mode="widthFix"></image>
+        <view class="w-condition"><image src="{{item.nightCondition.wImg}}" mode="widthFix"></image>
         <text>{{item.nightCondition.skyType}}</text></view>
         <text class="w-fengli">{{item.nightCondition.fengxiang}}  {{item.nightCondition.fengli}}</text>
       </view>
